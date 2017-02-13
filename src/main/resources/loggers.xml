@@ -22,13 +22,11 @@
     </bean>
 
     <bean id="combinedEventLogger"
-          class="ua.epam.spring.core.loggers.ConsoleEventLogger">
+          class="ua.epam.spring.core.loggers.CombinedEventLogger">
         <constructor-arg>
             <list>
-                <bean class="ua.epam.spring.core.loggers.ConsoleEventLogger"/>
-                <!--<ref bean="consoleEventLogger" />-->
-                <!--<ref bean="fileEventLogger" />-->
-                <!--<ref bean="cacheFileEventLogger" />-->
+                <ref bean="consoleEventLogger" />
+                <ref bean="fileEventLogger" />
             </list>
         </constructor-arg>
     </bean>
