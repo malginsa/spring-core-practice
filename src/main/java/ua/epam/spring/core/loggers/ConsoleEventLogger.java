@@ -1,4 +1,6 @@
-package com.epam.spring.core;
+package ua.epam.spring.core.loggers;
+
+import ua.epam.spring.core.EventLogger;
 
 public class ConsoleEventLogger implements EventLogger {
 

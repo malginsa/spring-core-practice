@@ -1,4 +1,4 @@
-package com.epam.spring.core;
+package ua.epam.spring.core.beans;
 
 public class Client {
 
