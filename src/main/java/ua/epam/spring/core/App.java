@@ -38,8 +38,6 @@ public class App {
 
         app.logEvent(EventType.INFO, "Some event for user 1");
         app.logEvent(EventType.ERROR, "Some event for user 2");
-        app.logEvent(EventType.ERROR, "Some event for user 3");
-        app.logEvent(EventType.ERROR, "Some event for user 4");
 
         ctx.close(); // Spring closes context, invokes destroy method of every bean.
     }

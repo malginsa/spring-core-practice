@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:c="http://www.springframework.org/schema/c"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="
  		http://www.springframework.org/schema/beans
@@ -7,26 +9,23 @@
 
     <bean id="consoleEventLogger" class="ua.epam.spring.core.loggers.ConsoleEventLogger"/>
 
-    <bean id="fileEventLogger"
-          class="ua.epam.spring.core.loggers.FileEventLogger"
-          init-method="init">
-        <constructor-arg name="fileName" value="spring_test_1.log"/>
+    <bean id="fileEventLogger" class="ua.epam.spring.core.loggers.FileEventLogger"
+          init-method="init"
+          c:fileName="spring_test_1.log">
     </bean>
 
-    <bean id="cacheFileEventLogger"
-          class="ua.epam.spring.core.loggers.CacheFileEventLogger"
+    <bean id="cacheFileEventLogger" class="ua.epam.spring.core.loggers.CacheFileEventLogger"
           parent="fileEventLogger"
-          destroy-method="destroy">
-        <constructor-arg name="fileName" value="spring_test_1.log.cache"/>
-        <constructor-arg name="cacheSize" value="3"/>
+          destroy-method="destroy"
+          c:fileName="spring_test_1.log.cache"
+          c:cacheSize="3">
     </bean>
 
-    <bean id="combinedEventLogger"
-          class="ua.epam.spring.core.loggers.CombinedEventLogger">
+    <bean id="combinedEventLogger" class="ua.epam.spring.core.loggers.CombinedEventLogger">
         <constructor-arg>
             <list>
-                <ref bean="consoleEventLogger" />
-                <ref bean="fileEventLogger" />
+                <ref bean="consoleEventLogger"/>
+                <ref bean="fileEventLogger"/>
             </list>
         </constructor-arg>
     </bean>
