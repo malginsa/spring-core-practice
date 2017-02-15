@@ -12,15 +12,11 @@
 
     <import resource="loggers.xml"/>
 
-    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="locations">
-            <list>
-                <value>classpath:client.properties</value>
-            </list>
-        </property>
-        <property name="ignoreResourceNotFound" value="true" />
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
+          p:locations="classpath:client.properties"
+          p:ignoreResourceNotFound="true">
         <property name="systemPropertiesMode">
-            <util:constant static-field="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer.SYSTEM_PROPERTIES_MODE_OVERRIDE" />
+            <util:constant static-field="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer.SYSTEM_PROPERTIES_MODE_OVERRIDE"/>
         </property>
     </bean>
 
@@ -41,12 +37,11 @@
           p:greeting="${greeting}">
     </bean>
 
-    <bean id="event" class="ua.epam.spring.core.beans.Event"
-          scope="prototype">
+    <bean id="event" class="ua.epam.spring.core.beans.Event" scope="prototype">
         <constructor-arg>
             <bean class="java.util.Date"/>
         </constructor-arg>
-        <constructor-arg ref="dateFormat" />
+        <constructor-arg ref="dateFormat"/>
     </bean>
 
     <bean id="dateFormat" class="java.text.DateFormat" factory-method="getDateTimeInstance"/>
