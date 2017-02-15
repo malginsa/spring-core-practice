@@ -14,10 +14,8 @@
 
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
           p:locations="classpath:client.properties"
-          p:ignoreResourceNotFound="true">
-        <property name="systemPropertiesMode">
-            <util:constant static-field="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer.SYSTEM_PROPERTIES_MODE_OVERRIDE"/>
-        </property>
+          p:ignoreResourceNotFound="true"
+          p:systemPropertiesMode="#{T(org.springframework.beans.factory.config.PropertyPlaceholderConfigurer).SYSTEM_PROPERTIES_MODE_OVERRIDE}">
     </bean>
 
     <util:map id="loggerMap">
@@ -30,21 +28,20 @@
           c:defaultLogger-ref="cacheFileEventLogger"
           c:loggers-ref="loggerMap">
     </bean>
+    <!--c:defaultLogger-ref="#{ T(ua.epam.spring.core.beans.Event).isDay() ? fileEventLogger : consoleEventLogger }"-->
 
     <bean id="client" class="ua.epam.spring.core.beans.Client"
           c:id="${id}"
           c:fullName="${name}"
-          p:greeting="${greeting}">
+          p:greeting="#{ systemEnvironment['USER']}">
     </bean>
 
     <bean id="event" class="ua.epam.spring.core.beans.Event" scope="prototype">
         <constructor-arg>
             <bean class="java.util.Date"/>
         </constructor-arg>
-        <constructor-arg ref="dateFormat"/>
+        <constructor-arg value="#{T(java.text.DateFormat).getDateTimeInstance()}"/>
     </bean>
-
-    <bean id="dateFormat" class="java.text.DateFormat" factory-method="getDateTimeInstance"/>
 
     <bean id="awared" class="ua.epam.spring.core.util.AwareBean" init-method="init"/>
 

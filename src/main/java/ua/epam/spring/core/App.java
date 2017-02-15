@@ -36,6 +36,7 @@ public class App {
         ctx = new ClassPathXmlApplicationContext("spring.xml");
         App app = (App) ctx.getBean("app");
 
+        System.out.println(((Client) ctx.getBean("client")).getGreeting()); // msa
         app.logEvent(EventType.INFO, "Some event for user 1");
         app.logEvent(EventType.ERROR, "Some event for user 2");
 

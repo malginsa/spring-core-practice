@@ -12,6 +12,12 @@ public class Event {
     private DateFormat df;
     private static Random random = new Random();
 
+    public static boolean isDay() {
+        Date curr = new Date();
+        int hours = curr.getHours();
+        return  (hours > 8 && hours < 17);
+    }
+
     public Event(Date date, DateFormat df) {
         this.date = date;
         this.df = df;

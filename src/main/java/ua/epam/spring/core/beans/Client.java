@@ -30,4 +30,8 @@ public class Client {
     public void setGreeting(String greeting) {
         this.greeting = greeting;
     }
+
+    public String getGreeting() {
+        return greeting;
+    }
 }
