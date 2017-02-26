@@ -1,5 +1,6 @@
 package ua.epam.spring.core;
 
+import org.apache.log4j.Logger;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import ua.epam.spring.core.beans.Client;
@@ -14,6 +15,11 @@ public class App {
     private EventLogger defaultLogger;
     private Map<EventType, EventLogger> loggers;
     private static ConfigurableApplicationContext ctx;
+
+    private static final Logger LOG = Logger.getLogger(App.class);
+
+    public App() {
+    }
 
     public App(Client client,
                EventLogger defaultLogger,

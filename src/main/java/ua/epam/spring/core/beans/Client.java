@@ -1,12 +1,19 @@
 package ua.epam.spring.core.beans;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
+@Component("client")
 public class Client {
 
     private String id;
     private String fullName;
     private String greeting;
 
-    public Client(String id, String fullName) {
+    @Autowired
+    public Client(@Value("${id}") String id,
+                  @Value("${name}") String fullName) {
         this.id = id;
         this.fullName = fullName;
     }
@@ -27,7 +34,9 @@ public class Client {
         this.fullName = fullName;
     }
 
-    public void setGreeting(String greeting) {
+    @Autowired
+    public void setGreeting(@Value("${greeting}")
+                                        String greeting) {
         this.greeting = greeting;
     }
 }

@@ -31,7 +31,6 @@ public class FileEventLogger implements EventLogger {
 
     @PostConstruct
     private void init() throws IOException {
-        System.out.println("init() in FileEventLogger");
         if (!file.canWrite()) {
             throw new IOException("Can't write to file " + fileName);
         }
