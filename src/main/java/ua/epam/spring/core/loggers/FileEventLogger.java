@@ -19,13 +19,11 @@ public class FileEventLogger implements EventLogger {
     public FileEventLogger(@Value("spring_test_1.log") String fileName) {
         this.fileName = fileName;
         file = new File(fileName);
-        // create file if does'n exist
-        if (!file.exists()) {
-            try {
-                Writer writer = new FileWriter(new File(fileName));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        // create the log file if it does'n exist; or wipe out its content
+        try {
+            Writer writer = new FileWriter(new File(fileName));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

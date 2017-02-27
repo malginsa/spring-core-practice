@@ -1,17 +1,16 @@
-package ua.epam.spring.core;
+package ua.epam.spring.core.aspect;
 
 import org.apache.log4j.Logger;
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.*;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
-import org.springframework.stereotype.Component;
+import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.annotation.AfterThrowing;
+import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
 
-@EnableAspectJAutoProxy
-@Aspect
-@Component("loggingAspect")
+//@Aspect
 public class LoggingAspect {
 
-    private static final Logger LOG_ASP = Logger.getLogger(LoggingAspect.class);
+    private static final Logger LOG = Logger.getLogger(LoggingAspect.class);
 
     @Pointcut("execution(* *.logEvent(..))")
     public void allLogEventMethods() {
@@ -23,7 +22,7 @@ public class LoggingAspect {
 
     @Before("allLogEventMethods()")
     public void logBefore(JoinPoint joinPoint) {
-        LOG_ASP.info("BEFORE: " + joinPoint.getTarget().getClass().getSimpleName()
+        LOG.info("BEFORE: " + joinPoint.getTarget().getClass().getSimpleName()
                 + " " + joinPoint.getSignature().getName());
     }
 
@@ -31,13 +30,13 @@ public class LoggingAspect {
             pointcut = "allLogEventMethods()",
             returning = "retVal")
     public void logAfter(Object retVal) {
-        LOG_ASP.info("Returned value: " + retVal);
+        LOG.info("Returned value: " + retVal);
     }
 
     @AfterThrowing(
             pointcut = "allLogEventMethods()",
             throwing = "ex")
     public void logAfterThrow(Throwable ex) {
-        LOG_ASP.warn("Thrown: " + ex);
+        LOG.warn("Thrown: " + ex);
     }
 }

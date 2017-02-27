@@ -3,6 +3,7 @@ package ua.epam.spring.core;
 import org.apache.log4j.Logger;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import ua.epam.spring.core.aspect.StatisticsAspect;
 import ua.epam.spring.core.beans.Client;
 import ua.epam.spring.core.beans.Event;
 import ua.epam.spring.core.loggers.EventLogger;
@@ -46,6 +47,11 @@ public class App {
 
         app.logEvent(EventType.INFO, "Some event for user 1");
         app.logEvent(EventType.ERROR, "Some event for user 2");
+
+        System.out.println("Statistics:");
+        StatisticsAspect statistics = (StatisticsAspect)
+                ctx.getBean("statisticsAspect");
+        System.out.println(statistics);
 
         ctx.close(); // Spring closes context, invokes destroy method of every bean.
     }

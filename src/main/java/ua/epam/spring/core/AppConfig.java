@@ -1,8 +1,10 @@
 package ua.epam.spring.core;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
-import org.springframework.context.annotation.*;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.context.annotation.Scope;
 import org.springframework.core.io.ClassPathResource;
 import ua.epam.spring.core.beans.Client;
 
@@ -10,10 +12,10 @@ import java.text.DateFormat;
 import java.util.Date;
 
 @Configuration
-@Import(LoggingAspect.class)
+@EnableAspectJAutoProxy
+//@Import({ LoggingAspect.class, StatisticsAspect.class,
+// LimitLogsAspect.class }) // it's necessary
 public class AppConfig {
-
-    private static final Logger LOG = Logger.getLogger(AppConfig.class);
 
     @Bean
     public static PropertyPlaceholderConfigurer propertyPlaceholderConfigurer() {
