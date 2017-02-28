@@ -2,12 +2,11 @@ package ua.epam.spring.core.aspect;
 
 import org.apache.log4j.Logger;
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.AfterThrowing;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.annotation.*;
+import org.springframework.stereotype.Component;
 
-//@Aspect
+@Aspect
+@Component("loggingAspect")
 public class LoggingAspect {
 
     private static final Logger LOG = Logger.getLogger(LoggingAspect.class);
