@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import ua.epam.spring.core.beans.Event;
@@ -24,7 +25,11 @@ public class DBLogger implements EventLogger {
     @PostConstruct
     private void init() {
         jdbcTemplate = (JdbcTemplate) ctx.getBean("jdbcTemplate");
-        jdbcTemplate.execute("create table t_event (id int, msg varchar(255))");
+        try {
+            jdbcTemplate.execute("create table t_event (id int, msg varchar(255))");
+        } catch (DataAccessException e) {
+            LOG.warn("can't create table t_event");
+        }
     }
 
     @PreDestroy

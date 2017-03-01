@@ -1,15 +1,23 @@
 package ua.epam.spring.core;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.Scope;
 import org.springframework.core.io.ClassPathResource;
 import ua.epam.spring.core.beans.Client;
+import ua.epam.spring.core.loggers.CombinedEventLogger;
+import ua.epam.spring.core.loggers.ConsoleEventLogger;
+import ua.epam.spring.core.loggers.EventLogger;
 
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 @Configuration
 @EnableAspectJAutoProxy
@@ -44,17 +52,19 @@ public class AppConfig {
         return java.text.DateFormat.getDateTimeInstance();
     }
 
-//    @Qualifier("consoleEventLogger")
-//    ConsoleEventLogger consBean;
-//
-//    @Qualifier("combinedEventLogger")
-//    CombinedEventLogger cmbBean;
-//
-//    @Bean
-//    public Map<EventType, EventLogger> loggerMap() {
-//        Map<EventType, EventLogger> res = new HashMap<EventType, EventLogger>();
-//        res.put(EventType.INFO, consBean);
-//        res.put(EventType.ERROR, cmbBean);
-//        return res;
-//    }
+    @Autowired
+    @Qualifier("consoleEventLogger")
+    EventLogger consoleEventLogger;
+
+    @Autowired
+    @Qualifier("combinedEventLogger")
+    EventLogger combinedEventLogger;
+
+    @Bean
+    public Map<EventType, EventLogger> loggerMap() {
+        Map<EventType, EventLogger> res = new HashMap<EventType, EventLogger>();
+        res.put(EventType.INFO, consoleEventLogger);
+        res.put(EventType.ERROR, combinedEventLogger);
+        return res;
+    }
 }

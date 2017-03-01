@@ -1,6 +1,7 @@
 package ua.epam.spring.core;
 
 import org.apache.log4j.Logger;
+import org.aspectj.weaver.Advice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -57,9 +58,12 @@ public class App {
 //        System.out.println("Statistics:\n" + statistics);
 
         DBLogger dBLogger = (DBLogger) ctx.getBean("dBLogger");
+        // TODO cast to target when aspect isactive
+//        Advice advice = (Advice) ctx.getBean("dBLogger");
+//        advice.ge
+
         System.out.println("Records in DB : " + dBLogger.getCount());
         System.out.println("Event with id=2: " + dBLogger.getEvent(2));
-
 
         ctx.close(); // Spring closes context, invokes destroy method of every bean.
     }

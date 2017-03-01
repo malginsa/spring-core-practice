@@ -27,10 +27,10 @@
         </constructor-arg>
     </bean>
 
-    <util:map id="loggerMap">
-        <entry key="INFO" value-ref="consoleEventLogger"/>
-        <entry key="ERROR" value-ref="combinedEventLogger"/>
-    </util:map>
+    <!--<util:map id="loggerMap">-->
+        <!--<entry key="INFO" value-ref="consoleEventLogger"/>-->
+        <!--<entry key="ERROR" value-ref="combinedEventLogger"/>-->
+    <!--</util:map>-->
 
     <bean id="app" class="ua.epam.spring.core.App"
           c:client-ref="client"
