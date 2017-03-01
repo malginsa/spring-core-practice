@@ -20,7 +20,8 @@ public class AppConfig {
     @Bean
     public static PropertyPlaceholderConfigurer propertyPlaceholderConfigurer() {
         PropertyPlaceholderConfigurer ppc = new PropertyPlaceholderConfigurer();
-        ppc.setLocation( new ClassPathResource("client.properties"));
+        ppc.setLocations( new ClassPathResource("client.properties"),
+                new ClassPathResource("jdbc.properties"));
         ppc.setIgnoreUnresolvablePlaceholders(true);
         ppc.setSystemPropertiesMode(
                 PropertyPlaceholderConfigurer.SYSTEM_PROPERTIES_MODE_OVERRIDE);

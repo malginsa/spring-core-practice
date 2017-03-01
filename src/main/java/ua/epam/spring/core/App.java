@@ -1,11 +1,14 @@
 package ua.epam.spring.core;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import ua.epam.spring.core.aspect.StatisticsAspect;
 import ua.epam.spring.core.beans.Client;
 import ua.epam.spring.core.beans.Event;
+import ua.epam.spring.core.loggers.DBLogger;
 import ua.epam.spring.core.loggers.EventLogger;
 
 import java.util.Map;
@@ -47,11 +50,16 @@ public class App {
 
         app.logEvent(EventType.INFO, "Some event for user 1");
         app.logEvent(EventType.ERROR, "Some event for user 2");
+        app.logEvent(EventType.ERROR, "Some event for user 3");
 
-        System.out.println("Statistics:");
         StatisticsAspect statistics = (StatisticsAspect)
                 ctx.getBean("statisticsAspect");
-        System.out.println(statistics);
+//        System.out.println("Statistics:\n" + statistics);
+
+        DBLogger dBLogger = (DBLogger) ctx.getBean("dBLogger");
+        System.out.println("Records in DB : " + dBLogger.getCount());
+        System.out.println("Event with id=2: " + dBLogger.getEvent(2));
+
 
         ctx.close(); // Spring closes context, invokes destroy method of every bean.
     }

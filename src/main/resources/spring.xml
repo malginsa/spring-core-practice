@@ -15,11 +15,14 @@
     <context:annotation-config/>
     <context:component-scan base-package="ua.epam.spring.core"/>
 
+    <import resource="jdbc.xml"/>
+
     <bean id="combinedEventLogger" class="ua.epam.spring.core.loggers.CombinedEventLogger">
         <constructor-arg>
             <list>
                 <ref bean="consoleEventLogger"/>
                 <ref bean="fileEventLogger"/>
+                <ref bean="dBLogger"/>
             </list>
         </constructor-arg>
     </bean>

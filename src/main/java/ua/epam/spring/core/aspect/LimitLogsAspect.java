@@ -13,7 +13,7 @@ import ua.epam.spring.core.loggers.EventLogger;
 
 /** Limit number of invokes of method ConsoleLogEvent.logEvent().
  *  In case of critical logs, redirect them to FileEventLogger */
-@Aspect
+//@Aspect
 @Component("limitLogsAspect") // !!! it's necessary
 public class LimitLogsAspect {
 

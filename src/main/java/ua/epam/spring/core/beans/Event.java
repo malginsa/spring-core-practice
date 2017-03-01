@@ -18,13 +18,19 @@ public class Event {
     private Date date;
     private DateFormat df;
     private static Random random = new Random();
+    private static int counter = 0;
 
     @Autowired
      public Event(@Qualifier("currentDate") Date date,
                   @Qualifier("dateFormat") DateFormat df) {
         this.date = date;
         this.df = df;
-        id = random.nextInt();
+//        id = random.nextInt();
+        id = counter += 1;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getMsg() {
