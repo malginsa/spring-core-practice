@@ -2,31 +2,14 @@
 <beans default-lazy-init="true"
        xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="
  		http://www.springframework.org/schema/beans
- 		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
-        http://www.springframework.org/schema/context
-        http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+ 		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
 
-    <!--<context:annotation-config/>-->
-    <!--<context:component-scan base-package="ua.epam.spring.core"/>-->
+    <bean id="a" class="ua.epam.spring.core.finaltest.A"/>
 
-    <bean id="a" class="ua.epam.spring.core.finaltest.A">
-        <constructor-arg ref="b"/>
-    </bean>
-
-    <bean id="b" class="ua.epam.spring.core.finaltest.B"
-          scope="prototype"
-            init-method="init">
-        <constructor-arg ref="c"/>
-    </bean>
-
-    <bean id="c" class="ua.epam.spring.core.finaltest.C"/>
-
-    <bean id="d" class="ua.epam.spring.core.finaltest.D"
-          lazy-init="false">
-        <constructor-arg ref="b"/>
+    <bean id="b" class="ua.epam.spring.core.finaltest.B">
+        <property name="str" value="#{a.hello()}"/>
     </bean>
 
 </beans>
