@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Random;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Component("event")
 @Scope("prototype")
@@ -18,15 +19,19 @@ public class Event {
     private Date date;
     private DateFormat df;
     private static Random random = new Random();
-    private static int counter = 0;
+    private static AtomicInteger counter = new AtomicInteger(0);
 
     @Autowired
-     public Event(@Qualifier("currentDate") Date date,
+    public Event(@Qualifier("currentDate") Date date,
                   @Qualifier("dateFormat") DateFormat df) {
         this.date = date;
         this.df = df;
 //        id = random.nextInt();
-        id = counter += 1;
+        id = counter.incrementAndGet();
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getId() {
@@ -39,6 +44,14 @@ public class Event {
 
     public void setMsg(String msg) {
         this.msg = msg;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     @Override

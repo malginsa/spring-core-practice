@@ -1,9 +1,6 @@
 package ua.epam.spring.core;
 
 import org.apache.log4j.Logger;
-import org.aspectj.weaver.Advice;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import ua.epam.spring.core.aspect.StatisticsAspect;
@@ -49,9 +46,9 @@ public class App {
         ctx = new ClassPathXmlApplicationContext("spring.xml");
         App app = (App) ctx.getBean("app");
 
-        app.logEvent(EventType.INFO, "Some event for user 1");
-        app.logEvent(EventType.ERROR, "Some event for user 2");
-        app.logEvent(EventType.ERROR, "Some event for user 3");
+        app.logEvent(EventType.INFO, "First for user 1");
+        app.logEvent(EventType.ERROR, "Second event for user 2");
+        app.logEvent(EventType.ERROR, "Third event for user 3");
 
         StatisticsAspect statistics = (StatisticsAspect)
                 ctx.getBean("statisticsAspect");
@@ -60,10 +57,16 @@ public class App {
         DBLogger dBLogger = (DBLogger) ctx.getBean("dBLogger");
         // TODO cast to target when aspect isactive
 //        Advice advice = (Advice) ctx.getBean("dBLogger");
-//        advice.ge
 
-        System.out.println("Records in DB : " + dBLogger.getCount());
-        System.out.println("Event with id=2: " + dBLogger.getEvent(2));
+        System.out.println("RECORDS IN DB : " + dBLogger.getCount());
+        System.out.println("MSG FROM DB WITH id=2: " + dBLogger.getMsg(2));
+
+        System.out.println("DB: " + dBLogger.getEventById(3));
+
+        System.out.println("ALL EVENTS FROM DB:");
+        for (Event event : dBLogger.getAllEvents()) {
+            System.out.println(event);
+        }
 
         ctx.close(); // Spring closes context, invokes destroy method of every bean.
     }
