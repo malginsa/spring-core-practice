@@ -17,7 +17,7 @@ public class CacheFileEventLogger extends FileEventLogger {
 
     @Autowired
     public CacheFileEventLogger(
-            @Value("spring_test_1.log.cache") String fileName,
+            @Value("cache_file_event_logger.log") String fileName,
             @Value("3") int cacheSize) {
         super(fileName);
         this.cacheSize = cacheSize;

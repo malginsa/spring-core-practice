@@ -16,7 +16,7 @@ public class FileEventLogger implements EventLogger {
     private File file;
 
     @Autowired
-    public FileEventLogger(@Value("spring_test_1.log") String fileName) {
+    public FileEventLogger(@Value("file_event_logger.log") String fileName) {
         this.fileName = fileName;
         file = new File(fileName);
         // create the log file if it does'n exist; or wipe out its content
