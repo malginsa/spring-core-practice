@@ -9,7 +9,12 @@ public class AppFinalTest {
 
     public static void main(String[] args) {
         context = new ClassPathXmlApplicationContext("finaltest.xml");
-        q9();
+        q10();
+    }
+
+    private static void q10() {
+        ClientService clientService = (ClientService) context.getBean("clientService");
+        System.out.println(clientService.authBean);
     }
 
     private static void q9() {
