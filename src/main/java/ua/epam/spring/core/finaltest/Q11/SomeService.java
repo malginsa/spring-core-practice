@@ -21,12 +21,12 @@ public class SomeService implements InitializingBean, DisposableBean {
 
 //    @Override
     public void afterPropertiesSet() throws Exception {
-        System.out.println("c");
+//        System.out.println("c");
     }
 
 //    @Override
     public void destroy() throws Exception {
-        System.out.println("d");
+//        System.out.println("d");
     }
 
     public void call() {

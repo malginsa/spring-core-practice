@@ -15,12 +15,12 @@ public class SomeComponent implements InitializingBean, DisposableBean {
 
 //    @Override
     public void afterPropertiesSet() throws Exception {
-        System.out.println("g");
+//        System.out.println("g");
     }
 
 //    @Override
     public void destroy() throws Exception {
-        System.out.println("h");
+//        System.out.println("h");
     }
 
     public void print() {

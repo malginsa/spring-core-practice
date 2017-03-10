@@ -6,12 +6,14 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class AppRun {
 
     public static void main(String[] args) {
-        ConfigurableApplicationContext appCtx =
+        ConfigurableApplicationContext appContext =
                 new ClassPathXmlApplicationContext("Q11springContext.xml");
 
-        SomeService service = appCtx.getBean(SomeService.class);
+        SomeService service = appContext.getBean(SomeService.class);
         service.call();
 
-        appCtx.close();
+        appContext.getBean("someComponent", SomeComponent.class);
+
+        appContext.close();
     }
 }
