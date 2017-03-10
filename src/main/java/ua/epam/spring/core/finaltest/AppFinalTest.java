@@ -8,9 +8,22 @@ public class AppFinalTest {
     private static ConfigurableApplicationContext context;
 
     public static void main(String[] args) {
-
         context = new ClassPathXmlApplicationContext("finaltest.xml");
+        q9();
+    }
 
+    private static void q9() {
+        Invoker invoker = (Invoker) context.getBean("invoker");
+        invoker.invoke();
+        System.out.println(invoker.getClass());
+    }
+
+    private static void q6() {
+        Service service = context.getBean(Service.class);
+//        service.update("hi, service, do update");
+    }
+
+    private static void q5() {
         B b = (B) context.getBean("b");
         System.out.println(b.getStr());
     }
